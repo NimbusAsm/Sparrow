@@ -11,8 +11,7 @@ Sparrow/
 │   │   ├── index.js            # Entry point for bot detection
 │   │   └── userAgents.js       # List of supported user agents
 │   ├── caching/                # Caching mechanisms
-│   │   ├── index.js            # Cache management logic
-│   │   └── cacheConfig.js      # Cache configuration
+│   │   └── index.js            # Cache management logic
 │   ├── prerendering/           # Prerendering logic
 │   │   ├── index.js            # Entry point for prerendering
 │   │   └── renderer.js         # Headless browser rendering logic
@@ -25,12 +24,12 @@ Sparrow/
 │   ├── monitoring/             # Monitoring and health checks
 │   │   ├── index.js            # Monitoring entry point
 │   │   └── metrics.js          # Performance metrics logic
-│   └── utils/                  # Utility functions
-│       ├── logger.js           # Logging utility
-│       └── configLoader.js     # Configuration loader
-├── config/                     # Configuration files
-│   ├── config.example.json     # Example configuration file
-│   └── config.schema.json      # JSON schema for configuration validation
+│   ├── utils/                  # Utility functions
+│   │   └── logger.js           # Logging utility
+│   └── config/                     # Configuration files
+│       ├── config.example.json     # Example configuration file
+│       ├── config.schema.json      # JSON schema for configuration validation
+│       └── provider.js             # Configuration provider
 ├── tests/                      # Test cases
 │   ├── unit/                   # Unit tests
 │   ├── integration/            # Integration tests

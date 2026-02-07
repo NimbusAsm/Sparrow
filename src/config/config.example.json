@@ -1,0 +1,46 @@
+﻿{
+    "port": 7700,
+    "mode": "standalone",
+    "cache": {
+        "enabled": true,
+        "ttl": 3600,
+        "maxSize": "100MB"
+    },
+    "agent": {
+        "enabled": false,
+        "centralized": {
+            "link": "http://localhost:7701"
+        }
+    },
+    "standalone": {
+        "targetUrl": "https://your-spa-website.com",
+        "rendering": {
+            "timeout": 30000,
+            "waitUntil": {
+                "signal": "networkidle0",
+                "continousTimeout": 1000
+            }
+        }
+    },
+    "middleware": {
+        "proxy": {
+            "host": "localhost",
+            "port": 5000,
+            "protocol": "http"
+        },
+        "bots": {
+            "userAgents": [
+                "googlebot",
+                "bingbot",
+                "slackbot",
+                "twitterbot",
+                "facebookexternalhit",
+                {
+                    "name": "baidu",
+                    "pattern": "baiduspider",
+                    "UA": "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)"
+                }
+            ]
+        }
+    }
+}

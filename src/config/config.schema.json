@@ -1,0 +1,220 @@
+﻿{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Sparrow Configuration Schema",
+    "type": "object",
+    "properties": {
+        "port": {
+            "type": "integer",
+            "description": "The port on which Sparrow will run.",
+            "minimum": 1,
+            "maximum": 65535
+        },
+        "mode": {
+            "type": "string",
+            "description": "The mode in which Sparrow operates.",
+            "enum": [
+                "standalone",
+                "middleware",
+                "agent"
+            ]
+        },
+        "cache": {
+            "type": "object",
+            "description": "Cache configuration settings.",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Enable or disable caching."
+                },
+                "ttl": {
+                    "type": "integer",
+                    "description": "Cache time-to-live in seconds.",
+                    "minimum": 1
+                },
+                "maxSize": {
+                    "type": "string",
+                    "description": "Maximum cache size (e.g., '100MB', '1GB').",
+                    "pattern": "^\\d+(MB|GB)$"
+                }
+            },
+            "required": [
+                "enabled",
+                "ttl",
+                "maxSize"
+            ]
+        },
+        "agent": {
+            "type": "object",
+            "description": "Agent mode configuration settings.",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Enable or disable agent mode."
+                },
+                "centralized": {
+                    "type": "object",
+                    "description": "Centralized server configuration.",
+                    "properties": {
+                        "link": {
+                            "type": "string",
+                            "description": "URL of the centralized Sparrow server.",
+                            "format": "uri"
+                        }
+                    },
+                    "required": [
+                        "link"
+                    ]
+                }
+            },
+            "required": [
+                "enabled",
+                "centralized"
+            ]
+        },
+        "standalone": {
+            "type": "object",
+            "description": "Standalone mode configuration settings.",
+            "properties": {
+                "targetUrl": {
+                    "type": "string",
+                    "description": "The SPA URL to prerender.",
+                    "format": "uri"
+                },
+                "rendering": {
+                    "type": "object",
+                    "description": "Rendering settings.",
+                    "properties": {
+                        "timeout": {
+                            "type": "integer",
+                            "description": "Page render timeout in milliseconds.",
+                            "minimum": 1
+                        },
+                        "waitUntil": {
+                            "type": "object",
+                            "description": "Wait conditions for rendering.",
+                            "properties": {
+                                "signal": {
+                                    "type": "string",
+                                    "description": "Wait condition signal (e.g., 'networkidle0', 'load', 'domcontentloaded').",
+                                    "enum": [
+                                        "networkidle0",
+                                        "load",
+                                        "domcontentloaded"
+                                    ]
+                                },
+                                "continousTimeout": {
+                                    "type": "integer",
+                                    "description": "Additional timeout to wait for continuous network activity after signal.",
+                                    "minimum": 1
+                                }
+                            },
+                            "required": [
+                                "signal",
+                                "continousTimeout"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "timeout",
+                        "waitUntil"
+                    ]
+                }
+            },
+            "required": [
+                "targetUrl",
+                "rendering"
+            ]
+        },
+        "middleware": {
+            "type": "object",
+            "description": "Middleware mode configuration settings.",
+            "properties": {
+                "proxy": {
+                    "type": "object",
+                    "description": "Proxy settings for middleware mode.",
+                    "properties": {
+                        "host": {
+                            "type": "string",
+                            "description": "Host of the SPA server."
+                        },
+                        "port": {
+                            "type": "integer",
+                            "description": "Port of the SPA server.",
+                            "minimum": 1,
+                            "maximum": 65535
+                        },
+                        "protocol": {
+                            "type": "string",
+                            "description": "Protocol used by the SPA server.",
+                            "enum": [
+                                "http",
+                                "https"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "host",
+                        "port",
+                        "protocol"
+                    ]
+                },
+                "bots": {
+                    "type": "object",
+                    "description": "Bot detection settings.",
+                    "properties": {
+                        "userAgents": {
+                            "type": "array",
+                            "description": "List of user agents for bot detection.",
+                            "items": {
+                                "oneOf": [
+                                    {
+                                        "type": "string",
+                                        "description": "User agent string."
+                                    },
+                                    {
+                                        "type": "object",
+                                        "description": "Detailed user agent configuration.",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "description": "Name of the bot."
+                                            },
+                                            "pattern": {
+                                                "type": "string",
+                                                "description": "Pattern to match the user agent."
+                                            },
+                                            "UA": {
+                                                "type": "string",
+                                                "description": "Full user agent string."
+                                            }
+                                        },
+                                        "required": [
+                                            "name",
+                                            "pattern",
+                                            "UA"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "userAgents"
+                    ]
+                }
+            },
+            "required": [
+                "proxy",
+                "bots"
+            ]
+        }
+    },
+    "required": [
+        "port",
+        "mode",
+        "cache",
+        "agent",
+        "standalone",
+        "middleware"
+    ]
+}
