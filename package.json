@@ -1,0 +1,28 @@
+{
+  "name": "sparrow",
+  "version": "0.0.1",
+  "description": "A high-performance SEO prerendering middleware designed to enhance search engine optimization for Single Page Applications (SPAs).",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NimbusAsm/Sparrow.git"
+  },
+  "keywords": [
+    "SEO",
+    "SPA",
+    "prerendering",
+    "middleware",
+    "server",
+    "service",
+    "optimization"
+  ],
+  "author": "Crequency Open Source Organization",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NimbusAsm/Sparrow/issues"
+  },
+  "homepage": "https://github.com/NimbusAsm/Sparrow#readme"
+}
