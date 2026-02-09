@@ -1,9 +1,13 @@
 ﻿// Entry point for prerendering
-const renderer = require("./renderer.js");
+const { initBrowser, renderPage } = require("./renderer.js");
+
+async function initPrerenderer() {
+  await initBrowser();
+}
 
 async function prerender(url) {
   try {
-    const content = await renderer.renderPage(url);
+    const content = await renderPage(url);
     return content;
   } catch (error) {
     console.error("Error during prerendering:", error);
@@ -11,4 +15,4 @@ async function prerender(url) {
   }
 }
 
-module.exports = { prerender };
+module.exports = { initPrerenderer, prerender };

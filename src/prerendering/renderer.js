@@ -1,23 +1,43 @@
 ﻿// Headless browser rendering logic
-const { launch } = require("puppeteer");
+const puppeteer = require("puppeteer");
+
+let browserInstance = null;
+
+async function initBrowser() {
+  if (!browserInstance) {
+    browserInstance = await puppeteer.launch({
+      ignoreHTTPSErrors: true,
+      headless: true,
+    });
+  }
+}
 
 async function renderPage(url) {
-  const browser = await launch();
-  const page = await browser.newPage();
+  if (!browserInstance) {
+    throw new Error(
+      "Browser instance not initialized. Call initBrowser first.",
+    );
+  }
 
-  let content = null;
+  const page = await browserInstance.newPage();
 
   try {
     await page.goto(url, { waitUntil: "networkidle0" });
-    content = await page.content();
+    const content = await page.content();
+    return content;
   } catch (error) {
     console.error("Failed to render page:", error);
     throw error;
   } finally {
-    await browser.close();
+    await page.close();
   }
-
-  return content;
 }
 
-module.exports = { renderPage };
+async function closeBrowser() {
+  if (browserInstance) {
+    await browserInstance.close();
+    browserInstance = null;
+  }
+}
+
+module.exports = { initBrowser, renderPage, closeBrowser };

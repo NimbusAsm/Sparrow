@@ -20,4 +20,4 @@ function clearCache() {
   cache.clear();
 }
 
-export default { setCache, getCache, clearCache };
+module.exports = { setCache, getCache, clearCache };
