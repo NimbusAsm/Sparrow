@@ -1,5 +1,5 @@
 ﻿// Entry point for bot detection
-import { some } from "./userAgents";
+const { some } = require("./userAgents");
 
 function isBot(userAgent) {
   if (!userAgent) return false;
@@ -15,4 +15,4 @@ function isBot(userAgent) {
   });
 }
 
-export default { isBot };
+module.exports = { isBot };

@@ -1,9 +1,9 @@
-﻿import { existsSync } from "fs";
-import { resolve } from "path";
+﻿const { existsSync } = require("fs");
+const { resolve } = require("path");
 
 class ConfigProvider {
   constructor() {
-    const configPath = resolve(__dirname, "config.js");
+    const configPath = resolve(__dirname, "config.json");
     if (existsSync(configPath)) {
       this.config = require(configPath);
     } else {
@@ -16,4 +16,4 @@ class ConfigProvider {
   }
 }
 
-export default ConfigProvider;
+module.exports = ConfigProvider;

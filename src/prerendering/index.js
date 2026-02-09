@@ -1,5 +1,5 @@
 ﻿// Entry point for prerendering
-import renderer from "./renderer";
+const renderer = require("./renderer.js");
 
 async function prerender(url) {
   try {
@@ -11,4 +11,4 @@ async function prerender(url) {
   }
 }
 
-export default { prerender };
+module.exports = { prerender };
