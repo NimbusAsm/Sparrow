@@ -6,6 +6,7 @@ let browserInstance = null;
 async function initBrowser() {
   if (!browserInstance) {
     browserInstance = await puppeteer.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
       ignoreHTTPSErrors: true,
       headless: true,
     });

@@ -218,7 +218,7 @@ services:
       - "7700:7700"
       - "7701:7701" # Monitoring port
     volumes:
-      - ./config.json:/app/config.json # In this file, config your spa page url (We suggest you to use Caddy for your SPA website)
+      - ./config.json:/app/src/config/config.json # In this file, config your spa page url (We suggest you to use Caddy for your SPA website)
     networks:
       - sparrow_network
 
